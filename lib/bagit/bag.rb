@@ -41,7 +41,7 @@ module BagIt
 
     # Return the paths to each bag file relative to bag_dir
     def bag_files
-      Dir[File.join(data_dir, '**', '*')].select { |f| File.file? f }
+      Dir.glob(File.join(data_dir,'**','*'), File::FNM_DOTMATCH).select { |f| File.file? f}
     end
 
     # Return the paths to each tag file relative to bag_dir
