@@ -39,7 +39,7 @@ describe "Tag Specs" do
       expect(File.join(@bag_path,"fedora","foo","newfoo","deep")).to exist_on_fs
     end
     it "should not allow overwriting of tag files" do
-      expect { @bag.add_tag_file("tag-0") { |io| io.puts 'overwrite!' } }.to raise_error
+      expect { @bag.add_tag_file("tag-0") { |io| io.puts 'overwrite!' } }.to raise_error(RuntimeError, "Tag file already in manifest: tag-0")
     end
     it "should allow addition of tag files via copy" do
       src_path = File.join @sandbox.to_s, 'somefile'
@@ -50,12 +50,12 @@ describe "Tag Specs" do
   end
   describe "#remove_tag_file" do
     it "should raise an error when removing non existant files" do
-      expect { @bag.remove_tag_file("file-x") }.to raise_error
+      expect { @bag.remove_tag_file("file-x") }.to raise_error(RuntimeError, "Tag file is not in manifest: file-x")
     end
   end
   describe "#delete_tag_file" do
     it "should raise an error when deleting non existant tag files" do
-      expect { @bag.delete_tag_file("file-x") }.to raise_error
+      expect { @bag.delete_tag_file("file-x") }.to raise_error(RuntimeError, "Tag file does not exist: file-x")
   end
   end
 end

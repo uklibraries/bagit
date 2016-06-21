@@ -72,7 +72,7 @@ describe BagIt::Bag do
       end
 
       it "should not allow overwriting of files" do
-        expect { @bag.add_file("file-0") { |io| io.puts 'overwrite!' } }.to raise_error
+        expect { @bag.add_file("file-0") { |io| io.puts 'overwrite!' } }.to raise_error(RuntimeError, "Bag file exists: file-0")
       end
 
       it "should update payload oxum" do
@@ -84,7 +84,7 @@ describe BagIt::Bag do
 
     describe "#remove_file" do
       it "should raise an error when deleing non existant files" do
-        expect { @bag.remove_file("file-x") }.to raise_error
+        expect { @bag.remove_file("file-x") }.to raise_error(RuntimeError, "Bag file does not exist: file-x")
       end
     end
 
