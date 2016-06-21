@@ -15,7 +15,7 @@ module BagitMatchers
       "expected <#{@target}> to be in collection <#{@expected}>"
     end
 
-    def negative_failure_message
+    def failure_message_when_negated
       "expected <#{@target}> to not be in collection <#{@expected}>"
     end
 
@@ -36,7 +36,7 @@ module BagitMatchers
       "expected <#{@target}> to exist, but it doesn't"
     end
 
-    def negative_failure_message
+    def failure_message_when_negated
       "expected <#{@target}> to not exist but it does"
     end
 
